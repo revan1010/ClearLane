@@ -1,0 +1,86 @@
+[
+  {
+    "tollId": "TOLL_01",
+    "name": "Mass Pike - Boston",
+    "fee": 1.5,
+    "roadId": "boston-nyc",
+    "qrData": "{\"tollId\":\"TOLL_01\",\"name\":\"Mass Pike - Boston\",\"fee\":1.5,\"roadId\":\"boston-nyc\"}"
+  },
+  {
+    "tollId": "TOLL_02",
+    "name": "Mass Pike - Worcester",
+    "fee": 2.0,
+    "roadId": "boston-nyc",
+    "qrData": "{\"tollId\":\"TOLL_02\",\"name\":\"Mass Pike - Worcester\",\"fee\":2.0,\"roadId\":\"boston-nyc\"}"
+  },
+  {
+    "tollId": "TOLL_03",
+    "name": "Mass Pike - Springfield",
+    "fee": 1.75,
+    "roadId": "boston-nyc",
+    "qrData": "{\"tollId\":\"TOLL_03\",\"name\":\"Mass Pike - Springfield\",\"fee\":1.75,\"roadId\":\"boston-nyc\"}"
+  },
+  {
+    "tollId": "TOLL_04",
+    "name": "CT Welcome",
+    "fee": 2.5,
+    "roadId": "boston-nyc",
+    "qrData": "{\"tollId\":\"TOLL_04\",\"name\":\"CT Welcome\",\"fee\":2.5,\"roadId\":\"boston-nyc\"}"
+  },
+  {
+    "tollId": "TOLL_05",
+    "name": "Hartford Plaza",
+    "fee": 2.0,
+    "roadId": "boston-nyc",
+    "qrData": "{\"tollId\":\"TOLL_05\",\"name\":\"Hartford Plaza\",\"fee\":2.0,\"roadId\":\"boston-nyc\"}"
+  },
+  {
+    "tollId": "TOLL_06",
+    "name": "New Haven Exit",
+    "fee": 2.25,
+    "roadId": "boston-nyc",
+    "qrData": "{\"tollId\":\"TOLL_06\",\"name\":\"New Haven Exit\",\"fee\":2.25,\"roadId\":\"boston-nyc\"}"
+  },
+  {
+    "tollId": "TOLL_07",
+    "name": "Bridgeport Plaza",
+    "fee": 1.75,
+    "roadId": "boston-nyc",
+    "qrData": "{\"tollId\":\"TOLL_07\",\"name\":\"Bridgeport Plaza\",\"fee\":1.75,\"roadId\":\"boston-nyc\"}"
+  },
+  {
+    "tollId": "TOLL_08",
+    "name": "Stamford Gateway",
+    "fee": 2.5,
+    "roadId": "boston-nyc",
+    "qrData": "{\"tollId\":\"TOLL_08\",\"name\":\"Stamford Gateway\",\"fee\":2.5,\"roadId\":\"boston-nyc\"}"
+  },
+  {
+    "tollId": "TOLL_09",
+    "name": "Greenwich Border",
+    "fee": 3.0,
+    "roadId": "boston-nyc",
+    "qrData": "{\"tollId\":\"TOLL_09\",\"name\":\"Greenwich Border\",\"fee\":3.0,\"roadId\":\"boston-nyc\"}"
+  },
+  {
+    "tollId": "TOLL_10",
+    "name": "Bronx Entry",
+    "fee": 3.5,
+    "roadId": "boston-nyc",
+    "qrData": "{\"tollId\":\"TOLL_10\",\"name\":\"Bronx Entry\",\"fee\":3.5,\"roadId\":\"boston-nyc\"}"
+  },
+  {
+    "tollId": "TOLL_11",
+    "name": "Triborough Bridge",
+    "fee": 4.0,
+    "roadId": "boston-nyc",
+    "qrData": "{\"tollId\":\"TOLL_11\",\"name\":\"Triborough Bridge\",\"fee\":4.0,\"roadId\":\"boston-nyc\"}"
+  },
+  {
+    "tollId": "TOLL_12",
+    "name": "Manhattan Exit",
+    "fee": 1.75,
+    "roadId": "boston-nyc",
+    "qrData": "{\"tollId\":\"TOLL_12\",\"name\":\"Manhattan Exit\",\"fee\":1.75,\"roadId\":\"boston-nyc\"}"
+  }
+]

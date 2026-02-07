@@ -1,0 +1,56 @@
+# Dependencies
+node_modules
+.pnp
+.pnp.js
+
+# Build
+.next
+out
+build
+dist
+
+# Env
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# IDE
+.idea
+.vscode
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Vercel
+.vercel
+
+# TypeScript
+*.tsbuildinfo
+next-env.d.ts
+
+# Cursor AI
+.cursor/
+
+# Documentation (keep only essential docs)
+AUTH_ERROR_ANALYSIS.md
+CHECK_AUTHORITY_BALANCE.md
+DEMO_CHEAT_SHEET.md
+FINAL_STATUS_REPORT.md
+FIX_SUMMARY.md
+QUICK_START_CHECKLIST.md
+REAL_INTEGRATION_SUMMARY.md
+instruction.md
+docs/
+.env.example
+# Temporary files
+lib/yellowService_transfer_fix.ts
