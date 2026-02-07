@@ -522,7 +522,7 @@ export async function transfer(
       console.log(`🔏 Signing transfer with SESSION KEY (ID: ${id})...`);
       
       // Sign with SESSION KEY using direct signature (no Ethereum prefix)
-      const sessionAccount = privateKeyToAccount(sessionPrivateKey);
+      const sessionAccount = privateKeyToAccount(sessionPrivateKey!);
       const messageToSign = JSON.stringify(reqArray);
       
       // Hash the message with keccak256
