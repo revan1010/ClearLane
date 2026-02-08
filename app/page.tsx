@@ -71,13 +71,13 @@ export default function HomePage() {
             </div>
             
             <h1 className="text-5xl font-bold text-gray-900 leading-tight mb-6">
-              Pay tolls once a month,
-              <span className="gradient-text"> not once a mile</span>
+              Pay tolls
+              <span className="gradient-text"> instantly</span>,
+              <span className="gradient-text"> not expensively</span>
             </h1>
 
             <p className="text-xl text-gray-600 mb-8 leading-relaxed">
-              Stop paying $2+ gas fees for every toll. Open a session once, drive through 
-              unlimited tolls with zero fees, settle everything in one transaction.
+              Stop paying $2+ gas fees for every toll. ClearLane uses Yellow Network's state channels to process instant, gasless toll payments as you drive through - no stopping, no blockchain delays.
             </p>
 
             {/* Features */}
