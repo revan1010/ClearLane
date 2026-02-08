@@ -10,9 +10,8 @@ import BalanceDisplay from '@/components/BalanceDisplay';
 import TollFeed from '@/components/TollFeed';
 import MapView from '@/components/MapView';
 import SimulateMode from '@/components/SimulateMode';
-import ScanMode from '@/components/ScanMode';
 import TollAuthorityBalance from '@/components/TollAuthorityBalance';
-import { Car, Camera, LogOut, Settings, Menu, X } from 'lucide-react';
+import { Car, QrCode, LogOut, Settings, Menu, X } from 'lucide-react';
 
 export default function DashboardPage() {
   const router = useRouter();
@@ -33,19 +32,15 @@ export default function DashboardPage() {
   } = useTollPayment();
 
   const [selectedRoute, setSelectedRoute] = useState<Route | null>(ROUTES[0]);
-  const [isScanMode, setIsScanMode] = useState(false);
-  const [activeTab, setActiveTab] = useState<'simulate' | 'scan'>('simulate');
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   // Redirect if no session (with delay to allow session to load)
   const [hasCheckedSession, setHasCheckedSession] = useState(false);
   
   useEffect(() => {
-    // Wait a moment for the session to load from yellowService
     const timer = setTimeout(() => {
       setHasCheckedSession(true);
     }, 500);
-    
     return () => clearTimeout(timer);
   }, []);
   
@@ -75,23 +70,6 @@ export default function DashboardPage() {
       startSimulation(route, handleTollPaid, handleSimulationComplete);
     },
     [startSimulation, handleTollPaid, handleSimulationComplete]
-  );
-
-  // Handle QR scan
-  const handleTollScanned = useCallback(
-    async (tollData: { tollId: string; name: string; fee: number; roadId: string }) => {
-      const transaction: TollTransaction = {
-        tollId: tollData.tollId,
-        name: tollData.name,
-        fee: tollData.fee,
-        timestamp: new Date().toISOString(),
-        location: { lat: 0, lng: 0 },
-        roadId: tollData.roadId,
-        settled: false,
-      };
-      addTransaction(transaction);
-    },
-    [addTransaction]
   );
 
   // Handle session close
@@ -133,6 +111,13 @@ export default function DashboardPage() {
             {/* Desktop Nav */}
             <div className="hidden md:flex items-center gap-4">
               <button
+                onClick={() => router.push('/my-qr-code')}
+                className="flex items-center gap-2 px-4 py-2 text-primary-600 hover:text-primary-700 hover:bg-primary-50 rounded-lg transition-colors font-medium"
+              >
+                <QrCode className="w-4 h-4" />
+                My QR Code
+              </button>
+              <button
                 onClick={() => router.push('/settlement')}
                 className="flex items-center gap-2 px-4 py-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-colors"
               >
@@ -160,6 +145,16 @@ export default function DashboardPage() {
           {/* Mobile Menu */}
           {isMobileMenuOpen && (
             <div className="md:hidden mt-4 pt-4 border-t space-y-2">
+              <button
+                onClick={() => {
+                  router.push('/my-qr-code');
+                  setIsMobileMenuOpen(false);
+                }}
+                className="w-full flex items-center gap-2 px-4 py-3 text-primary-600 hover:bg-primary-50 rounded-lg"
+              >
+                <QrCode className="w-4 h-4" />
+                My QR Code
+              </button>
               <button
                 onClick={() => {
                   router.push('/settlement');
@@ -191,99 +186,24 @@ export default function DashboardPage() {
           <BalanceDisplay session={session} isLoading={isLoading} />
         </div>
 
-        {/* Mode Tabs */}
-        <div className="mb-6">
-          <div className="flex bg-white rounded-xl p-1 shadow-sm">
-            <button
-              onClick={() => setActiveTab('simulate')}
-              className={`flex-1 flex items-center justify-center gap-2 py-3 rounded-lg font-medium transition-all ${
-                activeTab === 'simulate'
-                  ? 'bg-primary-500 text-white shadow-md'
-                  : 'text-gray-600 hover:text-gray-900'
-              }`}
-            >
-              <Car className="w-5 h-5" />
-              Simulate Drive
-            </button>
-            <button
-              onClick={() => setActiveTab('scan')}
-              className={`flex-1 flex items-center justify-center gap-2 py-3 rounded-lg font-medium transition-all ${
-                activeTab === 'scan'
-                  ? 'bg-primary-500 text-white shadow-md'
-                  : 'text-gray-600 hover:text-gray-900'
-              }`}
-            >
-              <Camera className="w-5 h-5" />
-              Scan QR
-            </button>
-          </div>
-        </div>
-
         {/* Main Content Grid */}
         <div className="grid lg:grid-cols-2 gap-6">
-          {/* Left Column */}
+          {/* Left Column - Simulation */}
           <div className="space-y-6">
-            {activeTab === 'simulate' ? (
-              <>
-                <SimulateMode
-                  onStartDrive={handleStartDrive}
-                  onStopDrive={stopSimulation}
-                  onReset={resetSimulation}
-                  isDriving={isDriving}
-                  currentTollIndex={currentTollIndex}
-                  selectedRoute={selectedRoute}
-                  onSelectRoute={setSelectedRoute}
-                />
-                <MapView
-                  route={selectedRoute}
-                  currentTollIndex={currentTollIndex}
-                  isDriving={isDriving}
-                />
-              </>
-            ) : (
-              <div className="bg-white rounded-2xl shadow-lg p-6">
-                <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
-                  <Camera className="w-5 h-5 text-primary-600" />
-                  QR Code Scanner
-                </h3>
-                <div className="text-center py-8">
-                  <div className="w-20 h-20 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <Camera className="w-10 h-10 text-primary-600" />
-                  </div>
-                  <p className="text-gray-600 mb-4">
-                    Scan toll booth QR codes for instant payment
-                  </p>
-                  <button
-                    onClick={() => setIsScanMode(true)}
-                    className="px-6 py-3 bg-gradient-to-r from-primary-500 to-primary-600 text-white font-semibold rounded-xl hover:from-primary-600 hover:to-primary-700 transition-all shadow-lg shadow-primary-500/25"
-                  >
-                    Open Camera
-                  </button>
-                </div>
-
-                {/* Demo QR Codes */}
-                <div className="mt-6 p-4 bg-gray-50 rounded-xl">
-                  <p className="text-sm font-medium text-gray-700 mb-3">Demo: Click to simulate scan</p>
-                  <div className="grid grid-cols-4 gap-2">
-                    {ROUTES[0].tolls.slice(0, 8).map((toll) => (
-                      <button
-                        key={toll.id}
-                        onClick={() => handleTollScanned({
-                          tollId: toll.id,
-                          name: toll.name,
-                          fee: toll.fee,
-                          roadId: ROUTES[0].routeId,
-                        })}
-                        className="p-2 bg-white rounded-lg border border-gray-200 hover:border-primary-300 hover:bg-primary-50 transition-all text-center"
-                      >
-                        <div className="text-lg mb-1">📍</div>
-                        <p className="text-xs text-gray-600 truncate">${toll.fee.toFixed(2)}</p>
-                      </button>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            )}
+            <SimulateMode
+              onStartDrive={handleStartDrive}
+              onStopDrive={stopSimulation}
+              onReset={resetSimulation}
+              isDriving={isDriving}
+              currentTollIndex={currentTollIndex}
+              selectedRoute={selectedRoute}
+              onSelectRoute={setSelectedRoute}
+            />
+            <MapView
+              route={selectedRoute}
+              currentTollIndex={currentTollIndex}
+              isDriving={isDriving}
+            />
           </div>
 
           {/* Right Column - Transaction Feed & Authority Balance */}
@@ -293,13 +213,6 @@ export default function DashboardPage() {
           </div>
         </div>
       </div>
-
-      {/* Scan Mode Overlay */}
-      <ScanMode
-        isEnabled={isScanMode}
-        onTollScanned={handleTollScanned}
-        onClose={() => setIsScanMode(false)}
-      />
     </div>
   );
 }

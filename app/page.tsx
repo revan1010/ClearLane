@@ -45,9 +45,17 @@ export default function HomePage() {
                 <p className="text-xs text-gray-500">Powered by Yellow Network</p>
               </div>
             </div>
-            <div className="flex items-center gap-2 text-sm text-gray-500">
-              <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
-              <span>Sandbox Mode</span>
+            <div className="flex items-center gap-4">
+              <button
+                onClick={() => router.push('/qr-generator')}
+                className="px-4 py-2 text-sm font-medium text-gray-700 hover:text-primary-600 hover:bg-primary-50 rounded-lg transition-colors"
+              >
+                🎥 Toll Booth Scanner
+              </button>
+              <div className="flex items-center gap-2 text-sm text-gray-500">
+                <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
+                <span>Sandbox Mode</span>
+              </div>
             </div>
           </div>
         </div>
