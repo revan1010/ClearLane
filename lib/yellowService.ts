@@ -746,7 +746,9 @@ export async function payToll(
 }
 
 /**
- * Close the session
+ * Close the session - Local cleanup only (no Yellow Network session to close)
+ * Note: Yellow Network doesn't use "sessions" - it has a unified balance.
+ * Transfers are instant and final. There's nothing to "close" or "settle".
  */
 export async function closeSession(): Promise<{
   success: boolean;
@@ -762,16 +764,38 @@ export async function closeSession(): Promise<{
     };
   }
 
+  console.log('📝 Closing local session (Yellow Network balance persists)');
+  
   const finalBalance = currentSession.currentBalance;
+  
+  // Get current Yellow Network balance for verification
+  let actualYellowBalance = finalBalance;
+  if (isAuthenticated) {
+    try {
+      const balances = await getLedgerBalances();
+      if (balances && typeof balances === 'object') {
+        const b = balances as { ledger_balances?: { asset: string; amount: string }[] };
+        if (b.ledger_balances) {
+          const usdcBalance = b.ledger_balances.find(bal => bal.asset === 'ytest.usd');
+          if (usdcBalance) {
+            actualYellowBalance = parseFloat(usdcBalance.amount);
+            console.log(`📊 Final Yellow Network balance: ${actualYellowBalance / 1000000} ytest.usd`);
+          }
+        }
+      }
+    } catch (error) {
+      console.warn('Could not verify final balance:', error);
+    }
+  }
+  
   currentSession.status = 'closed';
   currentSession = null;
 
-  console.log('Session closed');
+  console.log('✅ Local session closed. Yellow Network balance remains available.');
 
   return {
     success: true,
-    finalBalance,
-    txHash: `0x${Math.random().toString(16).slice(2).padEnd(64, '0')}`,
+    finalBalance: actualYellowBalance,
   };
 }
 
