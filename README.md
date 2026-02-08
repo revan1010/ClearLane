@@ -254,8 +254,6 @@ clearlane/
 4. Try the simulate drive to see real Yellow Network transfers!
 5. Watch the console to see WebSocket messages and balance updates
 
-**No tokens?** The app works without tokens - it will show you how the system works with simulated data.
-
 ## How Yellow Network Integration Works
 
 ### What's Real:
