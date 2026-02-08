@@ -242,9 +242,6 @@ clearlane/
 | 30 tolls (monthly commuter) | $146.25 ($75 gas + $71.25 tolls) | $71.25 (zero gas) | **$75.00** |
 | 100 tolls (commercial driver) | $487.50 ($250 gas + $237.50 tolls) | $237.50 (zero gas) | **$250.00** |
 
-## Demo
-
-🔗 **Live Demo**: [Your Vercel URL]
 
 ### Try It Yourself:
 
@@ -253,6 +250,8 @@ clearlane/
 3. Open a Yellow Network session
 4. Try the simulate drive to see real Yellow Network transfers!
 5. Watch the console to see WebSocket messages and balance updates
+
+
 
 ## How Yellow Network Integration Works
 
